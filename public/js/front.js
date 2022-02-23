@@ -1990,8 +1990,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Main"
+  name: "Main",
+  data: function data() {
+    return {
+      posts: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get("/api/posts").then(function (response) {
+      _this.posts = response.data;
+    });
+  }
 });
 
 /***/ }),
@@ -2569,16 +2586,24 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", [
+    _c(
+      "div",
+      { staticClass: "cards" },
+      _vm._l(_vm.posts, function (post, index) {
+        return _c("div", { key: index, staticClass: "card" }, [
+          _c("img", { attrs: { src: post.image } }),
+          _vm._v(" "),
+          _c("h4", [_vm._v(_vm._s(post.title))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(post.content))]),
+        ])
+      }),
+      0
+    ),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("main", [_c("h1", [_vm._v("main")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
